@@ -44,18 +44,20 @@ DECLARE_CLASS_CODEGEN(CustomJSONData, CustomBeatmapEventData, GlobalNamespace::B
 
     DECLARE_OVERRIDE_METHOD(void, Finalize, il2cpp_utils::FindMethod("System", "Object", "Finalize"));
 
+    DECLARE_INSTANCE_FIELD(CustomJSONData::JSONWrapper *, customData);
+
     REGISTER_FUNCTION(CustomBeatmapEventData,
         CJDLogger::GetLogger().debug("Registering CustomBeatmapEventData!");
 
         // Register constructor
         REGISTER_METHOD(ctor);
 
+        REGISTER_FIELD(customData);
+
         // Register methods
         REGISTER_METHOD(Finalize);
     )
 
-public:
-    rapidjson::Value *customData;
 )
 
 

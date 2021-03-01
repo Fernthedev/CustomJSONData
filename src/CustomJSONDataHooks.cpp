@@ -321,7 +321,15 @@ MAKE_HOOK_OFFSETLESS(GetBeatmapDataFromBeatmapSaveData, BeatmapData *, BeatmapDa
         float realTime = bpmChangeData2.bpmChangeStartTime + GetRealTimeFromBPMTime(self, time - bpmChangeData2.bpmChangeStartBpmTime, bpmChangeData2.bpm, shuffle, shufflePeriod);
         BeatmapEventType type = BeatmapDataLoader::ConvertFromBeatmapSaveDataBeatmapEventType(eventData->type);
         CustomBeatmapEventData *beatmapEventData = CRASH_UNLESS(il2cpp_utils::New<CustomBeatmapEventData*>(realTime, type, eventData->value));
-        beatmapEventData->customData = eventData->customData;
+//        beatmapEventData->customData = eventData->customData;
+
+
+        JSONWrapper *customData = CRASH_UNLESS(il2cpp_utils::New<JSONWrapper *>());
+        customData->value = eventData->customData;
+        customData->associatedData = std::map<char, void *>();
+        beatmapEventData->customData = customData;
+
+
         beatmapData->AddBeatmapEventData(beatmapEventData);
     }
     if (beatmapData->beatmapEventsData->get_Count() == 0) {
